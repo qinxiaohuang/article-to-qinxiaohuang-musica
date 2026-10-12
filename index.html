@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>秦小皇音乐</title>
+<link rel="icon" href="assets/img/note.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="app" class="app">
+
+  <!-- 权限提示条（默认隐藏） -->
+  <div id="perm-banner" class="perm-banner hidden">
+    <span id="perm-banner-text">浏览器要求重新确认文件夹权限。</span>
+    <button id="perm-banner-btn" class="btn btn-primary btn-sm">点此允许</button>
+  </div>
+
+  <!-- 顶部栏 -->
+  <header class="topbar">
+    <div class="brand">
+      <img src="assets/img/note.svg" alt="" class="brand-icon">
+      <span class="brand-name">秦小皇音乐</span>
+    </div>
+    <div class="topbar-right">
+      <span id="folder-label" class="folder-label">未选择文件夹</span>
+      <button id="btn-rescan" class="btn btn-ghost btn-sm" disabled>重新扫描</button>
+      <div class="menu-wrap">
+        <button id="btn-menu" class="btn btn-ghost btn-sm" disabled>菜单 ▾</button>
+        <div id="menu-pop" class="menu-pop hidden">
+          <button data-act="change-folder">更换音乐文件夹</button>
+          <button data-act="export-backup">导出备份…</button>
+          <button data-act="import-backup">导入备份…</button>
+          <button data-act="about">数据说明</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主区域：状态遮罩 + 歌单 -->
+  <main class="main">
+    <div id="overlay" class="overlay"></div>
+
+    <section id="playlist-view" class="playlist-view hidden">
+      <div class="playlist-toolbar">
+        <label class="check-all">
+          <input type="checkbox" id="check-all"> <span>全选</span>
+        </label>
+        <span id="checked-count" class="checked-count">已选 0 首</span>
+        <div class="toolbar-spacer"></div>
+        <button id="btn-play-checked" class="btn btn-primary btn-sm">播放选中</button>
+      </div>
+      <div id="song-list" class="song-list"></div>
+    </section>
+  </main>
+
+  <!-- 底部播放栏 -->
+  <footer class="playerbar disabled" id="player-bar">
+    <div class="pb-now">
+      <div class="pb-cover" id="pb-cover"></div>
+      <div class="pb-meta">
+        <div class="pb-title" id="pb-title">秦小皇音乐</div>
+        <div class="pb-artist" id="pb-artist">选择文件夹后开始听歌</div>
+      </div>
+    </div>
+
+    <div class="pb-controls">
+      <button id="btn-mode" class="pb-btn pb-mode" title="播放模式"></button>
+      <button id="btn-prev" class="pb-btn" title="上一首">⏮</button>
+      <button id="btn-playpause" class="pb-btn pb-play" title="播放/暂停">▶</button>
+      <button id="btn-next" class="pb-btn" title="下一首">⏭</button>
+    </div>
+
+    <div class="pb-seek">
+      <span id="time-cur" class="time">0:00</span>
+      <input type="range" id="seek" class="seek" min="0" max="1000" value="0" step="1" aria-label="播放进度">
+      <span id="time-total" class="time">0:00</span>
+    </div>
+
+    <div class="pb-volume">
+      <button id="btn-mute" class="pb-btn" title="静音">🔊</button>
+      <input type="range" id="volume" class="volume" min="0" max="100" value="80" aria-label="音量">
+    </div>
+  </footer>
+
+  <!-- 弹层容器（编辑、确认、关于等） -->
+  <div id="modal-root"></div>
+
+  <input type="file" id="import-file" accept=".json,application/json" class="hidden">
+</div>
+
+<!-- 脚本：严格按依赖顺序加载，全部本地、无模块加载器 -->
+<script src="assets/js/compat.js"></script>
+<script src="assets/js/bus.js"></script>
+<script src="assets/js/db.js"></script>
+<script src="assets/js/fs-access.js"></script>
+<script src="assets/js/metadata.js"></script>
+<script src="assets/js/scanner.js"></script>
+<script src="assets/js/state.js"></script>
+<script src="assets/js/backup.js"></script>
+<script src="assets/js/player.js"></script>
+<script src="assets/js/ui/overlays.js"></script>
+<script src="assets/js/ui/topbar.js"></script>
+<script src="assets/js/ui/playlist.js"></script>
+<script src="assets/js/ui/editor.js"></script>
+<script src="assets/js/ui/playerbar.js"></script>
+<script src="assets/js/shortcuts.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

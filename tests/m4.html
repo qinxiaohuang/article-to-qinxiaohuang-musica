@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>M4 测试</title>
+<style>
+body { font: 13px/1.6 Consolas, monospace; margin: 18px; background:#141417; color:#eee; }
+h2 { color:#ff7a45; }
+#qt-result { font-size:16px; font-weight:bold; margin:10px 0; }
+.pass { color:#46c46d; }
+.fail { color:#ff5c5c; }
+.fail pre { color:#f0b0b0; margin:2px 0 10px 20px; white-space:pre-wrap; }
+iframe { width: 900px; height: 400px; border: 1px solid #444; background:#000; }
+</style>
+</head>
+<body>
+<h2>M4 · 播放引擎与调度</h2>
+<div id="qt-result">运行中…</div>
+<div id="qt-list"></div>
+<iframe id="app" src="../index.html?v=m4v3"></iframe>
+
+<script src="qtest.js"></script>
+<script src="fixtures/fake-fs.js"></script>
+<script src="m4.js"></script>
+</body>
+</html>
